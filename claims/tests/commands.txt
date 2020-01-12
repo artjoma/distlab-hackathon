@@ -1,0 +1,62 @@
+explorer jungle(testnet): http://jungle.cryptolions.io
+
+
+create wallet: cleos wallet create --to-console
+cleos wallet unlock -n default --password PW5KHyzPxveQNF4HzqWMmxGiPupr89y6qK1T531A9mYvLLRL1kRz3
+
+cleos create key --to-console
+Private key: 5J4yzEL3mByMXeDUwkorUauF1y8L9S8W8H8E1NT2BQr55UNcmpt
+Public key: EOS83CXFfCfMGV8UTRAFUYY3L1QinYWxLr1bcGUzdJP1Qkh7LA7fM
+
+cleos wallet import --private-key 5J4yzEL3mByMXeDUwkorUauF1y8L9S8W8H8E1NT2BQr55UNcmpt
+
+-- check keys:
+cleos wallet keys
+
+go to http://monitor.jungletestnet.io/#account
+create account and link with created key (example: myacc1111111)
+
+-- Faucet:
+http://monitor.jungletestnet.io/#faucet
+
+
+-------------------------------------------------
+------  Create account for smart contract
+-------------------------------------------------
+
+cleos create key --to-console
+Private key: 5J2xJyVsBcWhBr3LqkpR7rFw7xScyugZvsCLAVRhqdPR5m1Gb25
+Public key: EOS7qXyL2LXvCrmSFPBBSsGHXdyXMvtZeaYAH433AQbVnZRtxBZwY
+
+cleos wallet import --private-key 5J2xJyVsBcWhBr3LqkpR7rFw7xScyugZvsCLAVRhqdPR5m1Gb25
+
+-- create new account
+host="http://jungle2.cryptolions.io"
+cleos -u $host system newaccount --stake-net "5 EOS" --stake-cpu "5 EOS" --buy-ram-kbytes 128 --transfer myacc1111111 claim1111111 EOS83CXFfCfMGV8UTRAFUYY3L1QinYWxLr1bcGUzdJP1Qkh7LA7fM EOS7qXyL2LXvCrmSFPBBSsGHXdyXMvtZeaYAH433AQbVnZRtxBZwY
+cleos -u $host get account claim1111111
+
+-- transfer money
+cleos -u $host transfer myacc1111111 claim1111111 "5.0 EOS"
+
+
+--Delegate net + cpu
+cleos -u $host system delegatebw bomberman123 cuttest12555 "1 EOS" "20 EOS"
+--Delegate ram
+cleos -u $host system buyram myacc1111111 claim1111111 "20 EOS"
+
+----------------------------------------
+tjoma@tj:~/dev/eos/smcontract/hackaton$ cleos create key --to-console
+Private key: 5KgRMDx9D4EXMSmy9vZhkmzN7qmZHkoUDgCkvg29s7TDpbiD2oj
+Public key: EOS7Cj5V8tp99GGWsAWsu8Gjx4Tg2YVVNWy2jWGJuhLH2CfgkdkZS
+cleos wallet import --private-key 5KgRMDx9D4EXMSmy9vZhkmzN7qmZHkoUDgCkvg29s7TDpbiD2oj
+
+host="http://jungle2.cryptolions.io"
+cleos -u $host system newaccount --stake-net "10 EOS" --stake-cpu "10 EOS" --buy-ram-kbytes 128 --transfer myacc1111111 claim1111112 EOS83CXFfCfMGV8UTRAFUYY3L1QinYWxLr1bcGUzdJP1Qkh7LA7fM EOS7Cj5V8tp99GGWsAWsu8Gjx4Tg2YVVNWy2jWGJuhLH2CfgkdkZS
+
+
+cleos -u $host system buyram myacc1111111 myacc1111111 "30 EOS"
+
+cleos -u $host system buyram claim1111112 claim1111112 "80 EOS"
+
+
+cleos wallet import --private-key 5HwMshnqn6YDeb4AqzbRgwVLRj7YwPqanndADgxim1jvcsUHKj9
