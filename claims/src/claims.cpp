@@ -67,13 +67,6 @@ public:
         deleteAllClaimEvents();
     }
 
-    //only for contract owner (self)
-    [[eosio::action]]
-    void delevents(name sender) {
-        require_auth(sender);
-        deleteAllEvents();
-    }
-
 private:
     typedef eosio::multi_index<"event"_n, event> eventTblType;
     typedef eosio::multi_index<"claimev"_n, claimevent, indexed_by<"byvin"_n, const_mem_fun<claimevent, uint128_t, &claimevent::get_secondary_1>>>  claimEventTblType;
